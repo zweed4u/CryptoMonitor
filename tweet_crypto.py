@@ -3,6 +3,8 @@ import time
 import tweepy
 import datetime
 from crypto import Crypto
+import signal
+import sys
 
 poll = 1800 # 1/2 hour
 
@@ -30,9 +32,22 @@ class Twitter:
 	def tweet(self, message):
 		api.update_status(status=message)
 
+
+def signal_handler(signal, frame):
+	print('Tweeting [DEACTIVATED] status and terminating program...')
+	crypto_twitter.tweet(f'{datetime.datetime.now()} :: [DEACTIVATED]')
+	sys.exit(0)
+
+# Handle ctl-c and ctrl-z signals
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTSTP, signal_handler)
+
 if __name__ == '__main__':
 	crypto_twitter = Twitter(consumerKey, consumerSecret, accessToken, accessTokenSecret) #twitter auth instance
 	crypto_twitter.authenticate()
+	print(f'Logged in as {api.me().name}\n=========================')
+	print('Tweeting [ACTIVATED] status...')
+	crypto_twitter.tweet(f'{datetime.datetime.now()} :: [ACTIVATED]')
 	crypto_fetch = Crypto()
 	while 1:
 		try:
