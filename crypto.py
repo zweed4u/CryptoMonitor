@@ -13,6 +13,9 @@ class Crypto:
 			self.headers['CB-VERSION'] = datetime.datetime.now().strftime("%Y-%m-%d")
 		btc_r = self.session.get('https://api.coinbase.com/v2/prices/BTC-USD/buy', headers=self.headers)
 		eth_r = self.session.get('https://api.coinbase.com/v2/prices/ETH-USD/buy', headers=self.headers)
+                ltc_r = self.session.get('https://api.coinbase.com/v2/prices/LTC-USD/buy', headers=self.headers)
 		btc_price = btc_r.json()["data"]["amount"]
 		eth_price = eth_r.json()["data"]["amount"]
-		return btc_price, eth_price
+		ltc_price = ltc_r.json()["data"]["amount"]
+		return btc_price, eth_price, ltc_price
+

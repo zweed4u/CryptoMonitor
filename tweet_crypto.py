@@ -52,9 +52,9 @@ if __name__ == '__main__':
 	while 1:
 		try:
 			btc_eth_tuple = crypto_fetch.get_exchange()
-			crypto_twitter.tweet(f'{datetime.datetime.now()}\nBTC: ${btc_eth_tuple[0]} USD\nETH: ${btc_eth_tuple[1]} USD')
+			crypto_twitter.tweet(f'{datetime.datetime.now()}\nBTC: ${btc_eth_tuple[0]} USD\nETH: ${btc_eth_tuple[1]} USD\nLTC: ${btc_eth_tuple[2]} USD')
 			# Log tweet for my view
-			print(f'{datetime.datetime.now()} :: BTC: {btc_eth_tuple[0]} && ETH: {btc_eth_tuple[1]}')
+			print(f'{datetime.datetime.now()} :: BTC: {btc_eth_tuple[0]} && ETH: {btc_eth_tuple[1]} && LTC: {btc_eth_tuple[2]}')
 		except:
 			continue
 
